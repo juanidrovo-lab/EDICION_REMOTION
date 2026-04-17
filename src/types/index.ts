@@ -1,6 +1,58 @@
+import type { PlatformId } from "../presets/platforms";
+
 // ─── Tipos base del timeline ─────────────────────────────────────────────────
 
 export type MediaType = "video" | "image" | "audio" | "text" | "shape";
+
+// ─── Tipos de caption palabra por palabra (TikTok / CapCut style) ─────────────
+
+export type WordCaptionStyle =
+  | "tiktok"        // texto blanco, fondo negro por palabra activa
+  | "karaoke"       // palabra activa en color destacado
+  | "bold_pop"      // palabra activa grande y en bold
+  | "highlight"     // fondo de color detrás de palabra activa
+  | "outline"       // solo outline, sin fondo
+  | "neon";         // efecto glow de neón
+
+export interface WordEntry {
+  word: string;
+  startFrame: number;
+  endFrame: number;
+}
+
+export interface WordCaptionClip extends BaseClip {
+  type: "text";
+  subtitleType: "word_caption";
+  words: WordEntry[];
+  captionStyle?: WordCaptionStyle;
+  activeColor?: string;
+  inactiveColor?: string;
+  activeBackground?: string;
+  fontSize?: number;
+  fontFamily?: string;
+  fontWeight?: FontWeight;
+  position?: "bottom" | "top" | "middle";
+  verticalOffset?: number;
+}
+
+// ─── CTA / Badge overlay ──────────────────────────────────────────────────────
+
+export type CTAType = "button" | "badge" | "pill" | "sticker";
+
+export interface CTAClip extends BaseClip {
+  type: "text";
+  subtitleType: "cta";
+  ctaType?: CTAType;
+  text: string;
+  subtext?: string;
+  x?: number;
+  y?: number;
+  backgroundColor?: string;
+  textColor?: string;
+  accentColor?: string;
+  icon?: "arrow" | "cart" | "star" | "fire" | "check" | "link";
+  pulsate?: boolean;
+}
 
 export type AnimationType =
   | "fadeIn"
@@ -120,7 +172,7 @@ export interface TextClip extends BaseClip {
   style?: TextStyle;
 }
 
-export type AnyTextClip = SubtitleClip | TextClip;
+export type AnyTextClip = SubtitleClip | TextClip | WordCaptionClip | CTAClip;
 
 // ─── Estilos ──────────────────────────────────────────────────────────────────
 
@@ -193,6 +245,8 @@ export interface VideoProject {
   height: number;
   durationInFrames: number;
   backgroundColor?: string;
+  platform?: PlatformId;
+  showSafeZone?: boolean;
   tracks: Track[];
   transitions?: Transition[];
   globalAudio?: AudioClip[];
@@ -201,3 +255,6 @@ export interface VideoProject {
 // ─── Props de composición ─────────────────────────────────────────────────────
 
 export type MainCompositionProps = VideoProject;
+
+// Re-export para conveniencia
+export type { PlatformId };

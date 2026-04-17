@@ -1,11 +1,22 @@
 {
   "name": "edicion-remotion",
-  "version": "1.0.0",
-  "description": "Editor de video profesional con Remotion — animaciones, transiciones, música, subtítulos y más",
+  "version": "2.0.0",
+  "description": "Editor de video profesional con Remotion para redes sociales — TikTok, Reels, Stories, Meta Ads",
   "scripts": {
     "start": "remotion studio",
     "build": "remotion render MainComposition out/video.mp4",
-    "render": "remotion render",
+
+    "render:demo": "remotion render Demo out/demo.mp4",
+
+    "render:tiktok": "remotion render HookAd_TikTok out/tiktok.mp4 --codec=h264 --crf=18",
+    "render:reels": "remotion render ProductShowcase_Reels out/reels.mp4 --codec=h264 --crf=18",
+    "render:ugc": "remotion render UGCAd_MetaVertical out/ugc_meta.mp4 --codec=h264 --crf=18",
+
+    "render:stories": "remotion render MainComposition out/stories.mp4 --props='{\"platform\":\"stories\"}' --codec=h264",
+    "render:feed-square": "remotion render MainComposition out/feed_square.mp4 --props='{\"platform\":\"instagram_feed_square\"}' --codec=h264",
+    "render:meta-horizontal": "remotion render MainComposition out/meta_horizontal.mp4 --props='{\"platform\":\"meta_ads_horizontal\"}' --codec=h264",
+
+    "render:all": "npm run render:tiktok && npm run render:reels && npm run render:ugc",
     "upgrade": "remotion upgrade"
   },
   "dependencies": {
