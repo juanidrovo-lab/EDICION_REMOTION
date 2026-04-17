@@ -1,0 +1,203 @@
+// ─── Tipos base del timeline ─────────────────────────────────────────────────
+
+export type MediaType = "video" | "image" | "audio" | "text" | "shape";
+
+export type AnimationType =
+  | "fadeIn"
+  | "fadeOut"
+  | "slideInLeft"
+  | "slideInRight"
+  | "slideInUp"
+  | "slideInDown"
+  | "slideOutLeft"
+  | "slideOutRight"
+  | "slideOutUp"
+  | "slideOutDown"
+  | "zoomIn"
+  | "zoomOut"
+  | "rotateIn"
+  | "bounceIn"
+  | "typewriter"
+  | "none";
+
+export type TransitionType =
+  | "cut"
+  | "crossfade"
+  | "wipeLeft"
+  | "wipeRight"
+  | "wipeUp"
+  | "wipeDown"
+  | "zoomCross"
+  | "slidePush"
+  | "circleReveal"
+  | "glitch";
+
+export type EasingType =
+  | "linear"
+  | "easeIn"
+  | "easeOut"
+  | "easeInOut"
+  | "spring"
+  | "bounce";
+
+export type TextAlign = "left" | "center" | "right";
+export type FontWeight = "normal" | "bold" | "light" | "extrabold";
+
+// ─── Animación aplicada a un clip ─────────────────────────────────────────────
+
+export interface ClipAnimation {
+  type: AnimationType;
+  durationInFrames: number;
+  easing?: EasingType;
+  delay?: number;
+}
+
+// ─── Clips del timeline ───────────────────────────────────────────────────────
+
+export interface BaseClip {
+  id: string;
+  type: MediaType;
+  startFrame: number;
+  durationInFrames: number;
+  trackIndex: number;
+  volume?: number;
+  opacity?: number;
+  enterAnimation?: ClipAnimation;
+  exitAnimation?: ClipAnimation;
+}
+
+export interface VideoClip extends BaseClip {
+  type: "video";
+  src: string;
+  trimStart?: number;
+  trimEnd?: number;
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+  cornerRadius?: number;
+}
+
+export interface ImageClip extends BaseClip {
+  type: "image";
+  src: string;
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+  cornerRadius?: number;
+  objectFit?: "cover" | "contain" | "fill";
+}
+
+export interface AudioClip extends BaseClip {
+  type: "audio";
+  src: string;
+  trimStart?: number;
+  trimEnd?: number;
+  fadeInFrames?: number;
+  fadeOutFrames?: number;
+}
+
+export interface SubtitleEntry {
+  startFrame: number;
+  endFrame: number;
+  text: string;
+}
+
+export interface SubtitleClip extends BaseClip {
+  type: "text";
+  subtitleType: "subtitle";
+  entries: SubtitleEntry[];
+  style?: SubtitleStyle;
+}
+
+export interface TextClip extends BaseClip {
+  type: "text";
+  subtitleType?: never;
+  text: string;
+  x?: number;
+  y?: number;
+  style?: TextStyle;
+}
+
+export type AnyTextClip = SubtitleClip | TextClip;
+
+// ─── Estilos ──────────────────────────────────────────────────────────────────
+
+export interface SubtitleStyle {
+  fontFamily?: string;
+  fontSize?: number;
+  fontWeight?: FontWeight;
+  color?: string;
+  backgroundColor?: string;
+  backgroundOpacity?: number;
+  borderRadius?: number;
+  paddingX?: number;
+  paddingY?: number;
+  textAlign?: TextAlign;
+  strokeColor?: string;
+  strokeWidth?: number;
+  shadowColor?: string;
+  shadowBlur?: number;
+  position?: "bottom" | "top" | "middle";
+  verticalOffset?: number;
+}
+
+export interface TextStyle {
+  fontFamily?: string;
+  fontSize?: number;
+  fontWeight?: FontWeight;
+  color?: string;
+  textAlign?: TextAlign;
+  lineHeight?: number;
+  letterSpacing?: number;
+  strokeColor?: string;
+  strokeWidth?: number;
+  shadowColor?: string;
+  shadowBlur?: number;
+  gradient?: {
+    from: string;
+    to: string;
+    direction?: "horizontal" | "vertical" | "diagonal";
+  };
+}
+
+// ─── Transición entre clips ───────────────────────────────────────────────────
+
+export interface Transition {
+  id: string;
+  type: TransitionType;
+  durationInFrames: number;
+  fromClipId: string;
+  toClipId: string;
+}
+
+// ─── Pista del timeline ───────────────────────────────────────────────────────
+
+export interface Track {
+  id: string;
+  name: string;
+  type: "video" | "audio" | "text" | "overlay";
+  muted?: boolean;
+  locked?: boolean;
+  clips: Array<VideoClip | ImageClip | AudioClip | AnyTextClip>;
+}
+
+// ─── Proyecto completo ────────────────────────────────────────────────────────
+
+export interface VideoProject {
+  id: string;
+  name: string;
+  fps: number;
+  width: number;
+  height: number;
+  durationInFrames: number;
+  backgroundColor?: string;
+  tracks: Track[];
+  transitions?: Transition[];
+  globalAudio?: AudioClip[];
+}
+
+// ─── Props de composición ─────────────────────────────────────────────────────
+
+export type MainCompositionProps = VideoProject;
