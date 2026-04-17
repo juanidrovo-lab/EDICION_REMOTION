@@ -157,7 +157,7 @@ export const RemotionRoot: React.FC = () => {
 
       {/* ── Hook Ad — TikTok 9:16 ── */}
       <Composition
-        id="HookAd_TikTok"
+        id="HookAd-TikTok"
         component={AnyComp(HookAdTemplate)}
         durationInFrames={15 * FPS}
         fps={FPS}
@@ -168,7 +168,7 @@ export const RemotionRoot: React.FC = () => {
 
       {/* ── Product Showcase — Reels 9:16 ── */}
       <Composition
-        id="ProductShowcase_Reels"
+        id="ProductShowcase-Reels"
         component={AnyComp(ProductShowcase)}
         durationInFrames={12 * FPS}
         fps={FPS}
@@ -179,7 +179,7 @@ export const RemotionRoot: React.FC = () => {
 
       {/* ── UGC Ad — Meta Ads Vertical ── */}
       <Composition
-        id="UGCAd_MetaVertical"
+        id="UGCAd-MetaVertical"
         component={AnyComp(UGCAdTemplate)}
         durationInFrames={20 * FPS}
         fps={FPS}
