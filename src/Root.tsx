@@ -2,6 +2,7 @@ import React from "react";
 import { Composition } from "remotion";
 import { MiVideoComposition } from "./MiVideo";
 import { VideoLegal } from "./VideoLegal";
+import { VideoFinal } from "./VideoFinal";
 import { MainComposition } from "./compositions/MainComposition";
 import { DemoComposition, demoProject } from "./compositions/DemoProject";
 import { HookAdTemplate } from "./templates/HookAdTemplate";
@@ -159,6 +160,17 @@ export const RemotionRoot: React.FC = () => {
 
       {/* ── MI VIDEO (tu proyecto) ── */}
       <MiVideoComposition />
+
+      {/* ── VIDEO FINAL — Juan Idrovo Abogado ── */}
+      <Composition
+        id="VideoFinal"
+        component={VideoFinal}
+        durationInFrames={50 * FPS}
+        fps={FPS}
+        width={1080}
+        height={1920}
+        defaultProps={{}}
+      />
 
       {/* ── VIDEO LEGAL — Cobro de deudas ── */}
       <Composition
