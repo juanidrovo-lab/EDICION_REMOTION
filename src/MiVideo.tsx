@@ -10,7 +10,7 @@
  */
 
 import React from "react";
-import { Composition, staticFile } from "remotion";
+import { Composition, staticFile } from "remotion"; // staticFile se usa cuando ponés tus propios archivos
 import { MainComposition } from "./compositions/MainComposition";
 import type { VideoProject } from "./types";
 
@@ -53,8 +53,8 @@ export const miVideo: VideoProject = {
         {
           id: "clip-1",
           type: "image",                           // "image" o "video"
-          src: staticFile("imagenes/foto1.jpg"),   // ruta dentro de public/
-          // src: "https://url-de-tu-imagen.jpg",  // o una URL directa
+          // src: staticFile("imagenes/foto1.jpg"), // ✏️ cuando tengas tu archivo descomentá esta y borrá la de abajo
+          src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1080&q=80",
           startFrame: seg(0),                      // empieza en el segundo 0
           durationInFrames: seg(10),               // dura 10 segundos
           trackIndex: 0,
@@ -66,7 +66,8 @@ export const miVideo: VideoProject = {
         {
           id: "clip-2",
           type: "image",
-          src: staticFile("imagenes/foto2.jpg"),
+          // src: staticFile("imagenes/foto2.jpg"), // ✏️ reemplazá con tu archivo
+          src: "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1080&q=80",
           startFrame: seg(10),
           durationInFrames: seg(10),
           trackIndex: 0,
@@ -78,7 +79,8 @@ export const miVideo: VideoProject = {
         {
           id: "clip-3",
           type: "image",
-          src: staticFile("imagenes/foto3.jpg"),
+          // src: staticFile("imagenes/foto3.jpg"), // ✏️ reemplazá con tu archivo
+          src: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1080&q=80",
           startFrame: seg(20),
           durationInFrames: seg(10),
           trackIndex: 0,
