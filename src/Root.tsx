@@ -1,5 +1,6 @@
 import React from "react";
 import { Composition } from "remotion";
+import { MiVideoComposition } from "./MiVideo";
 import { MainComposition } from "./compositions/MainComposition";
 import { DemoComposition, demoProject } from "./compositions/DemoProject";
 import { HookAdTemplate } from "./templates/HookAdTemplate";
@@ -154,6 +155,9 @@ export const RemotionRoot: React.FC = () => {
         height={1080}
         defaultProps={{}}
       />
+
+      {/* ── MI VIDEO (tu proyecto) ── */}
+      <MiVideoComposition />
 
       {/* ── Hook Ad — TikTok 9:16 ── */}
       <Composition
