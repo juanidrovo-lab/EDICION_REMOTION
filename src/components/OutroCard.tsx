@@ -14,6 +14,10 @@ import {
   Img,
   staticFile,
 } from "remotion";
+import { loadFont } from "@remotion/google-fonts/GreatVibes";
+
+// Carga Great Vibes — fuente caligráfica de alta gama
+const { fontFamily: FONT_SCRIPT } = loadFont();
 
 const NAVY      = "#060C18";
 const NAVY_MID  = "#0A1628";
@@ -24,8 +28,6 @@ const PHONE     = "0958 607 184";
 const ADDRESS   = "Av. José Peralta y Cornelio Merchan";
 const FONT_TITLE = "Arial Black, sans-serif";
 const FONT_BODY  = "Arial, sans-serif";
-// Fuente manuscrita — disponible en Windows/Chrome
-const FONT_SCRIPT = '"Brush Script MT", "Segoe Script", "Dancing Script", cursive';
 
 export const OUTRO_DURATION_FRAMES = 240; // 8 segundos
 
@@ -165,36 +167,36 @@ const HandwritingText: React.FC = () => {
       {/* Contenedor del texto con overflow hidden para el reveal */}
       <div style={{ position: "relative", display: "inline-block" }}>
 
-        {/* Texto manuscrito — SOLO el trazo (color transparent + WebkitTextStroke) */}
+        {/* Texto manuscrito — relleno con glow sutil */}
         <span
           style={{
             fontFamily: FONT_SCRIPT,
-            fontSize: 76,
-            fontWeight: 700,
-            color: "transparent",
-            WebkitTextStroke: `2.5px ${KHAKI}`,
+            fontSize: 96,
+            fontWeight: 400,
+            color: KHAKI,
             whiteSpace: "nowrap",
             display: "block",
-            lineHeight: 1.4,
-            // Clip que avanza de izquierda a derecha revelando el trazo
+            lineHeight: 1.5,
+            textShadow: `0 0 10px rgba(168,159,126,0.45), 0 2px 12px rgba(0,0,0,0.6)`,
+            // Reveal de izquierda a derecha
             clipPath: `inset(0 ${(100 - progress).toFixed(2)}% 0 0)`,
           }}
         >
           Abg. Juan Idrovo Ochoa
         </span>
 
-        {/* Punto de pluma — sigue el borde derecho del reveal */}
+        {/* Punto de pluma sutil */}
         {penVisible && (
           <div style={{
             position: "absolute",
-            top: "48%",
+            top: "52%",
             left: `${progress.toFixed(2)}%`,
             transform: "translate(-50%, -50%)",
-            width: 12,
-            height: 12,
+            width: 10,
+            height: 10,
             borderRadius: "50%",
             backgroundColor: WHITE,
-            boxShadow: `0 0 10px 5px ${KHAKI}, 0 0 20px 8px ${KHAKI_DIM}`,
+            boxShadow: `0 0 8px 4px rgba(168,159,126,0.55)`,
             pointerEvents: "none",
           }} />
         )}
