@@ -4,6 +4,7 @@ import { MiVideoComposition } from "./MiVideo";
 import { VideoLegal } from "./VideoLegal";
 import { VideoFinal } from "./VideoFinal";
 import { OutroCard, OUTRO_DURATION_FRAMES } from "./components/OutroCard";
+import { OutroCardV2, OUTRO_V2_DURATION } from "./components/OutroCardV2";
 import { MainComposition } from "./compositions/MainComposition";
 import { DemoComposition, demoProject } from "./compositions/DemoProject";
 import { HookAdTemplate } from "./templates/HookAdTemplate";
@@ -178,6 +179,17 @@ export const RemotionRoot: React.FC = () => {
         id="OutroCard"
         component={OutroCard}
         durationInFrames={OUTRO_DURATION_FRAMES}
+        fps={FPS}
+        width={1080}
+        height={1920}
+        defaultProps={{}}
+      />
+
+      {/* ── OUTRO CARD V2 — animaciones suaves + efecto tinta ── */}
+      <Composition
+        id="OutroCardV2"
+        component={OutroCardV2}
+        durationInFrames={OUTRO_V2_DURATION}
         fps={FPS}
         width={1080}
         height={1920}
