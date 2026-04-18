@@ -3,6 +3,7 @@ import { Composition } from "remotion";
 import { MiVideoComposition } from "./MiVideo";
 import { VideoLegal } from "./VideoLegal";
 import { VideoFinal } from "./VideoFinal";
+import { OutroCard, OUTRO_DURATION_FRAMES } from "./components/OutroCard";
 import { MainComposition } from "./compositions/MainComposition";
 import { DemoComposition, demoProject } from "./compositions/DemoProject";
 import { HookAdTemplate } from "./templates/HookAdTemplate";
@@ -161,11 +162,22 @@ export const RemotionRoot: React.FC = () => {
       {/* ── MI VIDEO (tu proyecto) ── */}
       <MiVideoComposition />
 
-      {/* ── VIDEO FINAL — Juan Idrovo Abogado ── */}
+      {/* ── VIDEO FINAL — Juan Idrovo Abogado (video + outro) ── */}
       <Composition
         id="VideoFinal"
         component={VideoFinal}
-        durationInFrames={50 * FPS}
+        durationInFrames={50 * FPS + OUTRO_DURATION_FRAMES}
+        fps={FPS}
+        width={1080}
+        height={1920}
+        defaultProps={{}}
+      />
+
+      {/* ── OUTRO CARD STANDALONE (para previsualizar solo) ── */}
+      <Composition
+        id="OutroCard"
+        component={OutroCard}
+        durationInFrames={OUTRO_DURATION_FRAMES}
         fps={FPS}
         width={1080}
         height={1920}

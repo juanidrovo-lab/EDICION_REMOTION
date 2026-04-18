@@ -19,12 +19,14 @@ import {
   spring,
   Img,
 } from "remotion";
+import { OutroCard, OUTRO_DURATION_FRAMES } from "./components/OutroCard";
 
 // ─── CONFIGURACIÓN ────────────────────────────────────────────────────────────
 
 const DURACION_SEG = 50;          // ✏️ cambiá por la duración real del video
 const FPS          = 30;
 const s            = (sec: number) => Math.round(sec * FPS);
+const TOTAL_FRAMES = s(DURACION_SEG) + OUTRO_DURATION_FRAMES;
 
 const NAVY    = "#0A1628";
 const GOLD    = "#C9A227";
@@ -276,31 +278,27 @@ const LogoReveal: React.FC<{ startSeg: number }> = ({ startSeg }) => {
 // ─── COMPOSICIÓN PRINCIPAL ────────────────────────────────────────────────────
 
 export const VideoFinal: React.FC = () => {
-  const LOGO_REVEAL_SEG = DURACION_SEG - 8; // últimos 8 segundos para el logo
-
   return (
     <AbsoluteFill style={{ backgroundColor: "#05080F" }}>
 
-      {/* Video editado */}
-      <OffthreadVideo
-        src={staticFile("imagenes/vid_edc.mp4")}
-        style={{ width: "100%", height: "100%", objectFit: "cover" }}
-      />
+      {/* ── VIDEO PRINCIPAL (duración real) ── */}
+      <Sequence from={0} durationInFrames={s(DURACION_SEG)} layout="none">
+        <AbsoluteFill>
+          <OffthreadVideo
+            src={staticFile("imagenes/vid_edc.mp4")}
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          />
+          <CinematicGrade />
+          <HookOverlay />
+          <SubtitleTrack />
+          <PhoneBadge />
+        </AbsoluteFill>
+      </Sequence>
 
-      {/* Grading cinematográfico */}
-      <CinematicGrade />
-
-      {/* Hook primeros 5 segundos */}
-      <HookOverlay />
-
-      {/* Subtítulos */}
-      <SubtitleTrack />
-
-      {/* Badge de teléfono persistente */}
-      <PhoneBadge />
-
-      {/* Logo reveal final */}
-      <LogoReveal startSeg={LOGO_REVEAL_SEG} />
+      {/* ── OUTRO CARD — 8 segundos al final ── */}
+      <Sequence from={s(DURACION_SEG)} durationInFrames={OUTRO_DURATION_FRAMES} layout="none">
+        <OutroCard />
+      </Sequence>
 
     </AbsoluteFill>
   );
