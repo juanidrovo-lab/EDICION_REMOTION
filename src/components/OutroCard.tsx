@@ -28,8 +28,8 @@ import {
 
 const NAVY      = "#060C18";
 const NAVY_MID  = "#0A1628";
-const GOLD      = "#C9A227";
-const GOLD_GLOW = "rgba(201,162,39,0.35)";
+const GOLD      = "#A89F7E";   // khaki del logo JI
+const GOLD_GLOW = "rgba(168,159,126,0.35)";
 const WHITE     = "#FFFFFF";
 
 const FONT_TITLE = "Arial Black, sans-serif";
@@ -147,8 +147,8 @@ const LogoBlock: React.FC = () => {
       marginBottom: 8,
     }}>
       <div style={{
-        width: 220,
-        height: 110,
+        width: 300,
+        height: 300,
         filter: `drop-shadow(0 0 ${18 * glow}px ${GOLD}88) drop-shadow(0 4px 20px rgba(0,0,0,0.8))`,
       }}>
         <Img
